@@ -1,4 +1,4 @@
-﻿@model List<Product>
+﻿@model ProductViewModel
 @{
     ViewData["Title"] = "Home Page";
 }
@@ -8,7 +8,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-11">
-                    <select name="category" class="form-select" asp-items="@ViewBag.Categories"> 
+                    <select name="category" class="form-select" asp-items="@(new SelectList(Model.Categories,"CategoryId","Name",Model.SelectedCategory))">
                         <option value="0">Hepsi</option>
                     </select>
                 </div>
@@ -32,7 +32,7 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var product in Model)
+        @foreach (var product in Model.Products)
         {
             <tr>
                 <td>@product.ProductId</td>
@@ -43,8 +43,8 @@
                 <td>@product.Price</td>
  
                 <td>
-                    <a href="" class="btn btn-sm btn-warning">Edit</a>
-                    <a href="" class="btn btn-sm btn-danger">Delete</a>
+                    <a asp-controller="Home" asp-action="Edit" asp-route-id="@product.ProductId" class="btn btn-sm btn-warning">Edit</a>
+                    <a asp-controller="Home" asp-action="Delete" asp-route-id="@product.ProductId" class="btn btn-sm btn-danger">Delete</a>
                 </td>
             </tr>
         }
