@@ -42,6 +42,18 @@ namespace FormsApp.Models
             }
         }
 
+        public void EditIsActives(Product updateProduct)
+        {
+            var entity = _db.Products.FirstOrDefault(p => p.ProductId == updateProduct.ProductId);
+            if (entity != null)
+            {
+                entity.IsActive = updateProduct.IsActive;
+                _db.Update(entity);
+                Save();
+            }
+          
+        }
+
         public void Add(Product model)
         {
             _db.Products.Add(model);

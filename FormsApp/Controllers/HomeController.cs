@@ -177,6 +177,15 @@ namespace FormsApp.Controllers
             _rep.Save();
             return RedirectToAction("Index");
         }
+        [HttpPost]
+        public IActionResult EditProducts(List<Product> products)
+        {
+            foreach (var product in products)
+            {
+                _rep.EditIsActives(product);
+            }
+            return RedirectToAction("Index");   
+        }
 
 
 
